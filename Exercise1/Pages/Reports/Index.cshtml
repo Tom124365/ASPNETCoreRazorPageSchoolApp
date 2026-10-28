@@ -1,0 +1,26 @@
+﻿@page
+@model Exercise1.Pages.Reports.IndexModel
+
+<h1>Student Grades Report</h1>
+
+<p>Select a course to generate a PDF report of its enrolled students.</p>
+
+<form method="get" action="/Reports">
+    <input type="hidden" name="handler" value="Pdf" />
+
+    <div class="mb-3">
+        <label for="courseId" class="form-label">Course</label>
+
+        <select id="courseId"
+                name="courseId"
+                class="form-select"
+                asp-items="Model.Courses"
+                required>
+            <option value="">-- Select a course --</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Generate PDF
+    </button>
+</form>
