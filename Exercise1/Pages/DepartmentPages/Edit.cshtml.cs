@@ -17,14 +17,14 @@ public class EditModel : PageModel
     [BindProperty]
     public Department Department { get; set; } = default!;
 
-    public async Task<IActionResult> OnGetAsync(int? departmentid)
+    public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (departmentid is null)
+        if (id is null)
         {
             return NotFound();
         }
 
-        var department = await _context.Departments.FirstOrDefaultAsync(m => m.DepartmentId == departmentid);
+        var department = await _context.Departments.FirstOrDefaultAsync(m => m.DepartmentId == id);
         if (department is null)
         {
             return NotFound();
@@ -63,8 +63,8 @@ public class EditModel : PageModel
         return RedirectToPage("./Index");
     }
 
-    private bool DepartmentExists(int departmentid)
+    private bool DepartmentExists(int id)
     {
-        return _context.Departments.Any(e => e.DepartmentId == departmentid);
+        return _context.Departments.Any(e => e.DepartmentId == id);
     }
 }

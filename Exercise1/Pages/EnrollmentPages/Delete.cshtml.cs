@@ -17,14 +17,14 @@ public class DeleteModel : PageModel
     [BindProperty]
     public Enrollment Enrollment { get; set; } = default!;
 
-    public async Task<IActionResult> OnGetAsync(int? enrollmentid)
+    public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (enrollmentid is null)
+        if (id is null)
         {
             return NotFound();
         }
 
-        var enrollment = await _context.Enrollments.FirstOrDefaultAsync(m => m.EnrollmentId == enrollmentid);
+        var enrollment = await _context.Enrollments.FirstOrDefaultAsync(m => m.EnrollmentId == id);
         if (enrollment is null)
         {
             return NotFound();
@@ -37,14 +37,14 @@ public class DeleteModel : PageModel
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync(int? enrollmentid)
+    public async Task<IActionResult> OnPostAsync(int? id)
     {
-        if (enrollmentid is null)
+        if (id is null)
         {
             return NotFound();
         }
 
-        var enrollment = await _context.Enrollments.FindAsync(enrollmentid);
+        var enrollment = await _context.Enrollments.FindAsync(id);
         if (enrollment != null)
         {
             Enrollment = enrollment;

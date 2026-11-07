@@ -15,14 +15,14 @@ public class DetailsModel : PageModel
 
     public Instructor Instructor { get; set; } = default!;
 
-    public async Task<IActionResult> OnGetAsync(int? instructorid)
+    public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (instructorid is null)
+        if (id is null)
         {
             return NotFound();
         }
 
-        var instructor = await _context.Instructors.FirstOrDefaultAsync(m => m.InstructorId == instructorid);
+        var instructor = await _context.Instructors.FirstOrDefaultAsync(m => m.InstructorId == id);
         if (instructor is null)
         {
             return NotFound();

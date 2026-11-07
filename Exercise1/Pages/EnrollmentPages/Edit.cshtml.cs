@@ -17,14 +17,14 @@ public class EditModel : PageModel
     [BindProperty]
     public Enrollment Enrollment { get; set; } = default!;
 
-    public async Task<IActionResult> OnGetAsync(int? enrollmentid)
+    public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (enrollmentid is null)
+        if (id is null)
         {
             return NotFound();
         }
 
-        var enrollment = await _context.Enrollments.FirstOrDefaultAsync(m => m.EnrollmentId == enrollmentid);
+        var enrollment = await _context.Enrollments.FirstOrDefaultAsync(m => m.EnrollmentId == id);
         if (enrollment is null)
         {
             return NotFound();
@@ -63,8 +63,8 @@ public class EditModel : PageModel
         return RedirectToPage("./Index");
     }
 
-    private bool EnrollmentExists(int enrollmentid)
+    private bool EnrollmentExists(int id)
     {
-        return _context.Enrollments.Any(e => e.EnrollmentId == enrollmentid);
+        return _context.Enrollments.Any(e => e.EnrollmentId == id);
     }
 }

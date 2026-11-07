@@ -15,14 +15,14 @@ public class DetailsModel : PageModel
 
     public Department Department { get; set; } = default!;
 
-    public async Task<IActionResult> OnGetAsync(int? departmentid)
+    public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (departmentid is null)
+        if (id is null)
         {
             return NotFound();
         }
 
-        var department = await _context.Departments.FirstOrDefaultAsync(m => m.DepartmentId == departmentid);
+        var department = await _context.Departments.FirstOrDefaultAsync(m => m.DepartmentId == id);
         if (department is null)
         {
             return NotFound();

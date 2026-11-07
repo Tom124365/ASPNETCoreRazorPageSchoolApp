@@ -17,14 +17,14 @@ public class EditModel : PageModel
     [BindProperty]
     public Course Course { get; set; } = default!;
 
-    public async Task<IActionResult> OnGetAsync(int? courseid)
+    public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (courseid is null)
+        if (id is null)
         {
             return NotFound();
         }
 
-        var course = await _context.Courses.FirstOrDefaultAsync(m => m.CourseId == courseid);
+        var course = await _context.Courses.FirstOrDefaultAsync(m => m.CourseId == id);
         if (course is null)
         {
             return NotFound();
@@ -63,8 +63,8 @@ public class EditModel : PageModel
         return RedirectToPage("./Index");
     }
 
-    private bool CourseExists(int courseid)
+    private bool CourseExists(int id)
     {
-        return _context.Courses.Any(e => e.CourseId == courseid);
+        return _context.Courses.Any(e => e.CourseId == id);
     }
 }

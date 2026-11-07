@@ -17,14 +17,14 @@ public class DeleteModel : PageModel
     [BindProperty]
     public Department Department { get; set; } = default!;
 
-    public async Task<IActionResult> OnGetAsync(int? departmentid)
+    public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (departmentid is null)
+        if (id is null)
         {
             return NotFound();
         }
 
-        var department = await _context.Departments.FirstOrDefaultAsync(m => m.DepartmentId == departmentid);
+        var department = await _context.Departments.FirstOrDefaultAsync(m => m.DepartmentId == id);
         if (department is null)
         {
             return NotFound();
@@ -37,14 +37,14 @@ public class DeleteModel : PageModel
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync(int? departmentid)
+    public async Task<IActionResult> OnPostAsync(int? id)
     {
-        if (departmentid is null)
+        if (id is null)
         {
             return NotFound();
         }
 
-        var department = await _context.Departments.FindAsync(departmentid);
+        var department = await _context.Departments.FindAsync(id);
         if (department != null)
         {
             Department = department;
